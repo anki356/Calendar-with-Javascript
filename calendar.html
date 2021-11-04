@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel='stylesheet' href="calendar.css">
+    <div
+        style="background-color: pink;color:white;text-align: center;font-weight: bold;font-size: 20px; width:40%;height: 100%;border-style: solid;padding: 20px;display: block;position: relative;left:25%;">
+        Calendar
+    </div>
+    <script>
+
+        let arrowElementRight = document.createElement("i");
+        let arrowElementAttr = document.createAttribute("style");
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <div style="background-color: pink;padding: 20px;width:40%;display: block;position: relative;left:25%;">
+            <span><i onclick="prevMonth(curr_month--)"
+                    style="border:solid black;border-width:0 3px 3px 0;display:inline-block;padding:3px;transform:rotate(135deg);-webkit-transform:rotate(135deg)"
+                    ;></i></span>
+            <span id="Months"
+                style="color:white;text-align: center;font-weight: bold;font-size: 20px;position: relative;left:42.5%"></span>
+        </div>
+        <p id="days"></p>
+    </div>
+
+
+    <script>
+        var date = new Date();
+        var first_day = 1;
+
+        var daysArray = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+        
+        var Month_array = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var no_of_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        var curr_month = date.getMonth();
+        document.getElementById("Months").innerHTML = `${Month_array[curr_month]}`
+
+  
+//creating days
+        
+        var text="";
+        const createDays=function(curr_month,text){
+         var first_day=1;   
+        var date_array = [first_day];
+        while (date_array.length < no_of_days[curr_month]) {
+            first_day++;
+            date_array.push(first_day);
+
+
+        }
+
+        var text = "<table><tr>";
+
+        for (let i = 0; i < 7; i++) {
+            text += "<th>" + daysArray[i] + "</th>";
+        }
+        text += "</tr>";
+        let date_var = 1;
+        let day_var = 0;
+
+        while (date_var <= no_of_days[curr_month]) {
+            text += "<tr>"
+
+            while (day_var < 7) {
+
+                var first_day = new Date(date.getFullYear(), curr_month, date_var).getDay();
+
+                if (date_var <= no_of_days[curr_month]) {
+                    if (day_var == first_day) {
+
+                        text += "<td>" + date_array[date_var - 1] + "</td>";
+
+                        date_var++;
+
+                    }
+                    else {
+                        text += "<td>" + "" + "</td>";
+
+                    }
+
+                }
+
+                day_var++;
+
+
+            }
+            text += "</tr>"
+            day_var = 0;
+
+        }
+
+        text += "</table>";
+
+        text += "</tr></table>";
+console.log(text);
+        return text;
+       };
+        document.getElementById("days").innerHTML = `${createDays(curr_month,text)}`; 
+
+        //Changing month
+        
+        function prevMonth(curr_month) {
+           
+            var m=curr_month;
+            document.getElementById('Months').innerHTML = `${Month_array[m]}`;
+            document.getElementById("days").innerHTML = `${createDays(m,text)}`
+
+        }
+       
+        
+      
+    </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,16 @@
+td,th{
+    font-size: 20px;
+    text-align: center;
+    
+
+}
+table{
+    position: relative; 
+    margin-left: 25%;
+    /* margin-right: 25%; */
+    width: 40%;
+
+}
+i{
+   position: relative;
+}
